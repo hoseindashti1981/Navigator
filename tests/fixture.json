@@ -1,0 +1,12 @@
+{
+ "version":1,
+ "route":{"name":"مسیر آزمایشی — دادهٔ ساختگی","description":"فقط برای آزمون نرم‌افزار؛ این نقاط GPS واقعی کاربر نیستند.","mode":"walking","duration_ms":600000},
+ "points":[
+  {"seq":0,"lat":35.715,"lng":51.405,"time":1791720000000,"accuracy":8,"altitude":null,"speed":1.5,"quality":"ok","gap":true},
+  {"seq":1,"lat":35.716,"lng":51.405,"time":1791720060000,"accuracy":8,"altitude":null,"speed":1.5,"quality":"ok","gap":false},
+  {"seq":2,"lat":35.716,"lng":51.407,"time":1791720180000,"accuracy":8,"altitude":null,"speed":1.5,"quality":"ok","gap":false},
+  {"seq":3,"lat":35.717,"lng":51.407,"time":1791720240000,"accuracy":8,"altitude":null,"speed":1.5,"quality":"ok","gap":false},
+  {"seq":4,"lat":35.717,"lng":51.410,"time":1791720420000,"accuracy":8,"altitude":null,"speed":1.5,"quality":"ok","gap":false},
+  {"seq":5,"lat":35.719,"lng":51.410,"time":1791720540000,"accuracy":8,"altitude":null,"speed":1.5,"quality":"ok","gap":false}
+ ]
+}

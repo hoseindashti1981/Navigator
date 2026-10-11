@@ -1,0 +1,8 @@
+/private/config.php
+/private/*.sqlite*
+/.tools/
+/release/
+/test-results/
+/node_modules/
+*.log
+.DS_Store
