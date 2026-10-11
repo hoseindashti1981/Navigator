@@ -143,7 +143,7 @@ switch ($action) {
         $q->execute([text_value($input['name'] ?? '',200,true),text_value($input['description'] ?? '',4000),$id]);
         $db->commit(); respond(['ok'=>true]);
     case 'delete':
-        $q=$db->prepare("UPDATE routes SET status='deleted',name='',description='',origin_lat=NULL,origin_lng=NULL,destination_lat=NULL,destination_lng=NULL WHERE id=?"); $q->execute([$id]);
+        $q=$db->prepare("UPDATE routes SET status='deleted',name='',description='',mode='driving',created_ms=0,duration_ms=0,distance_m=0,point_count=0,origin_lat=NULL,origin_lng=NULL,destination_lat=NULL,destination_lng=NULL WHERE id=?"); $q->execute([$id]);
         $q=$db->prepare('DELETE FROM points WHERE route_id=?'); $q->execute([$id]);
         $db->commit(); respond(['ok'=>true]);
     default: $db->rollBack(); fail('درخواست شناخته نشد.',404);
