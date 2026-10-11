@@ -82,7 +82,11 @@ const xml = v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt
 export function exportRoute(route,points,format) {
   const data={version:1,route,points};
   if(format==='json') return JSON.stringify(data,null,2);
-  if(format==='geojson') return JSON.stringify({type:'Feature',properties:{...route,samples:points},geometry:{type:'MultiLineString',coordinates:tracks(points).map(t=>t.map(p=>[p.lng,p.lat,...(p.altitude===null?[]:[p.altitude])]))}},null,2);
+  if(format==='geojson') {
+    const lines=tracks(points).map(t=>t.map(p=>[p.lng,p.lat,...(p.altitude==null?[]:[p.altitude])]));
+    const geometry=!lines.length?null:lines.some(t=>t.length===1)?{type:'GeometryCollection',geometries:lines.map(t=>t.length===1?{type:'Point',coordinates:t[0]}:{type:'LineString',coordinates:t})}:{type:'MultiLineString',coordinates:lines};
+    return JSON.stringify({type:'Feature',properties:{...route,samples:points},geometry},null,2);
+  }
   if(format!=='gpx') throw new Error('قالب خروجی شناخته نشد.');
   return '<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Lineyar Navigator" xmlns="http://www.topografix.com/GPX/1/1" xmlns:ln="https://lineyar.ir/navigator">'+
     '<metadata><name>'+xml(route.name)+'</name><desc>'+xml(route.description||'')+'</desc><extensions><ln:backup>'+xml(JSON.stringify(data))+'</ln:backup></extensions></metadata><trk><name>'+xml(route.name)+'</name>'+

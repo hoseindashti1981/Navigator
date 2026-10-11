@@ -65,6 +65,8 @@ test('JSON round trip preserves full samples; GeoJSON and GPX keep gaps and meta
  assert.equal(geo.geometry.type,'MultiLineString');assert.equal(geo.geometry.coordinates.length,2);assert.equal(geo.properties.samples.length,5);
  const gpx=exportRoute(route,points,'gpx');assert.equal((gpx.match(/<trkseg>/g)||[]).length,2);
  assert.match(gpx,/خانه &amp; سفر &lt;آزمایش&gt;/);assert.match(gpx,/<ln:backup>/);assert.match(gpx,/<time>/);
+ const singleton=JSON.parse(exportRoute(route,[points[0]],'geojson'));
+ assert.equal(singleton.geometry.type,'GeometryCollection');assert.equal(singleton.geometry.geometries[0].type,'Point');
 });
 test('import rejects invalid, empty, nonmonotonic and malformed metadata',()=>{
  const base={version:1,route:{name:'مسیر'},points:[point(0,0),point(0,.01,2000)]};
